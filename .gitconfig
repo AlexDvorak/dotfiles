@@ -1,0 +1,24 @@
+[user]
+	name = AlexDvorak
+	email = doe.jimmie@gmail.com
+[credential]
+	helper = store
+[difftool "Meld"]
+	path = /usr/bin/meld
+	cmd = '/usr/bin/meld' $LOCAL $REMOTE
+[mergetool "Meld"]
+	path = /usr/bin/meld
+	cmd = '/usr/bin/meld' $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = false
+[merge]
+	tool = Meld
+[mergetool]
+	keepBackup = false
+[core]
+	autocrlf = false
+	excludesfile = /home/alex/.config/GitForce/.gitexcludesfile
+	editor = nvim
+[gui]
+	editor = nvim
+[alias]
+	sglog = log --graph --pretty=format:\"%Cgreen%h%Creset - %C(cyan)%an <%ae>:%C(bold magenta)%d%n%B\"
