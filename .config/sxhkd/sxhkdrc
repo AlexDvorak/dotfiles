@@ -10,11 +10,20 @@ XF86AudioLowerVolume
 XF86AudioMute
   pactl set-sink-mute 0 toggle
 
+XF86AudioStop
+  mocp --stop
+
+XF86AudioPrev + {_,shift}
+  mocp {--seek=-10,--previous}
+
+XF86AudioPlay
+  mocp --toggle-pause
+
+XF86AudioNext + {_,shift}
+  mocp {--seek=10,--next}
+
 alt + shift + o
   slock &
-
-super + shift + s
-  scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Desktop/screenshots/'&
 
 #
 # wm independent hotkeys
