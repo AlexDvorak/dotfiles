@@ -75,6 +75,7 @@ source ~/.config/nvim/packages.vim
 
 "augroups---------------------------------
   augroup packager_filetype
-    autocmd FileType go    packadd vim-go
+    autocmd FileType go        packadd vim-go
+    autocmd FileType markdown  packadd vim-pencil
   augroup END
 "-----------------------------------------

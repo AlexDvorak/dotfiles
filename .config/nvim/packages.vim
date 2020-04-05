@@ -11,7 +11,7 @@ function! PackagerInit()
     call packager#add('editorconfig/editorconfig-vim')
 
   "packager/opt
-    call packager#add('takac/vim-hardtime',          {'type':'opt'})
+    call packager#add('reedes/vim-pencil',           {'type':'opt'})
     call packager#add('fatih/vim-go',                {'type':'opt'})
     call packager#add('kristijanhusak/vim-packager', {'type':'opt'})
 
