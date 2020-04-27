@@ -1,0 +1,33 @@
+# remap prefix key to Ctrl-Space
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+
+# Window numbering
+set -g base-index 1
+setw -g pane-base-index 1
+set -g renumber-windows on
+
+# Misc.
+set -g history-limit 10000
+setw -g monitor-activity on
+set -g visual-activity off
+set -g mouse on
+set -sg escape-time 0
+
+# Pane splits
+bind '\' split-window -h -c "#{pane_current_path}"
+bind '-' split-window -v -c "#{pane_current_path}"
+
+# System Clipboard
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel -i --clipboard"
+
+set -g default-terminal 'screen-256color-bce'
+set-option -sa terminal-overrides ',screen-256color-bce:RGB'
+
+# This tmux statusbar config was created by tmuxline.vim
+# on Thu, 03 Oct 2019
+
+set -g status "on"
+
+source ~/.tmux/themes/tomorrow-night-eighties.tmux
