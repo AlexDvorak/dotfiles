@@ -2,7 +2,7 @@ source ~/.config/nvim/packages.vim
 
 "Neovim Config----------------------------
   "Colorscheme------{{{
-    colorscheme gruvbox
+    colorscheme nord
     set background=dark
     syntax enable
   "-----------------}}}

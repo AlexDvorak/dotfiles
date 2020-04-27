@@ -5,8 +5,13 @@ function! PackagerInit()
 
   "packager/start
     call packager#add('morhetz/gruvbox')
+    call packager#add('rakr/vim-two-firewatch')
+    call packager#add('arcticicestudio/nord-vim')
+
     call packager#add('itchyny/lightline.vim')
     call packager#add('airblade/vim-gitgutter')
+    call packager#add('preservim/nerdtree')
+
     call packager#add('Shougo/deoplete.nvim')
     call packager#add('editorconfig/editorconfig-vim')
 
