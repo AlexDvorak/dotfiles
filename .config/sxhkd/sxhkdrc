@@ -22,7 +22,17 @@ XF86AudioPlay
 XF86AudioNext + {_,shift}
   mocp {--seek=10,--next}
 
-alt + shift + o
+
+XF86MonBrightnessUp
+  light -A 0.5
+
+XF86MonBrightnessDown
+  light -U 0.5
+
+alt + shift + s
+  /home/alex/.config/scripts/music.zsh
+
+alt + shift + p
   slock &
 
 #
@@ -36,8 +46,6 @@ super + Return
 # program launcher
 super + @space
 	dmenu_run
-
-# make sxhkd reload its configuration files:
 
 #
 # bspwm hotkeys

@@ -8,6 +8,16 @@ set -g base-index 1
 setw -g pane-base-index 1
 set -g renumber-windows on
 
+bind-key -n M-1 select-window -t 1
+bind-key -n M-2 select-window -t 2
+bind-key -n M-3 select-window -t 3
+bind-key -n M-4 select-window -t 4
+bind-key -n M-5 select-window -t 5
+bind-key -n M-6 select-window -t 6
+bind-key -n M-7 select-window -t 7
+bind-key -n M-8 select-window -t 8
+bind-key -n M-9 select-window -t 9
+
 # Misc.
 set -g history-limit 10000
 setw -g monitor-activity on
@@ -22,12 +32,17 @@ bind '-' split-window -v -c "#{pane_current_path}"
 # System Clipboard
 bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel -i --clipboard"
 
+# Colors + extras
 set -g default-terminal 'screen-256color-bce'
 set-option -sa terminal-overrides ',screen-256color-bce:RGB'
-
-# This tmux statusbar config was created by tmuxline.vim
-# on Thu, 03 Oct 2019
-
 set -g status "on"
 
 source ~/.tmux/themes/tomorrow-night-eighties.tmux
+
+set -g @resurrect-capture-pane-contents 'on'
+
+# Plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+run -b '~/.tmux/plugins/tpm/tpm'
