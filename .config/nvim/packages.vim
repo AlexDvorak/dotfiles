@@ -4,7 +4,7 @@ function! PackagerInit()
   call packager#init()
 
   "packager/start
-    call packager#add('morhetz/gruvbox')
+    call packager#add('trevordmiller/nova-vim')
     call packager#add('rakr/vim-two-firewatch')
     call packager#add('arcticicestudio/nord-vim')
 
@@ -14,6 +14,7 @@ function! PackagerInit()
 
     call packager#add('Shougo/deoplete.nvim')
     call packager#add('editorconfig/editorconfig-vim')
+    call packager#add('udalov/kotlin-vim')
 
   "packager/opt
     call packager#add('reedes/vim-pencil',           {'type':'opt'})
