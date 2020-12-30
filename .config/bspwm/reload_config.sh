@@ -1,10 +1,10 @@
-#!/bin/dash
+#!/usr/bin/ion
 
-pkill -x polybar
+echo "Killing processes"
 pkill -x sxhkd
 pkill -x dunst
-echo "Waiting for processes to die"
-wait
+pkill -x polybar
 echo "Restarting processes"
 
 /home/alex/.config/bspwm/bspwmrc
+echo "finished setup"

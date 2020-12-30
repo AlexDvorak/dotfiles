@@ -1,27 +1,24 @@
-#! /usr/bin/dash
+#! /usr/bin/ion
 
-ext_dsp=$(cat /sys/class/drm/card0-HDMI-A-2/status)
+let ext_dsp = $(cat /sys/class/drm/card0-HDMI-A-2/status)
 
 ### Wallpapers ###
-
-LAPTOP_WALL="$HOME/.wallpaper/Calder-Moore_Factory-comped.jpg"
-HDMI2_WALL="$HOME/.wallpaper/rocket-sunset_3440x1440.png"
-
-LAPTOP_BAR="laptop"
-HDMI2_BAR="main"
-
+let LAPTOP_WALL = "$HOME/Pictures/DJI/100MEDIA/DJI_0030.JPG"
+let HDMI2_WALL  = "$HOME/.wallpaper/rocket-sunset_3440x1440.png"
 #######
-
+let LAPTOP_BAR = "laptop"
+let HDMI2_BAR  = "main"
+#######
 setxkbmap dvorak
 xmodmap ~/.xmodmap
 
-#######
-
+echo "Starting up core processes"
 sxhkd &
 dunst &
-polybar $LAPTOP_BAR & >/dev/null
+polybar $LAPTOP_BAR &
 #######
 
+echo "Configuring BSPWM"
 bspc config border_width 2
 bspc config top_padding      10
 bspc config bottom_padding   44
@@ -29,14 +26,18 @@ bspc config left_padding     17
 bspc config right_padding    17
 
 #####
-if [ "$ext_dsp" = "connected" ]; then
+if test $ext_dsp = "connected"
+  echo "external display detected"
   bspc monitor eDP-1  -d 1 2 3 4 5 6
   bspc monitor HDMI-2 -d 1 2 3 4 5 6
   polybar $HDMI2_BAR &
   xwallpaper --output eDP-1  --zoom  $LAPTOP_WALL \
              --output HDMI-2 --center  $HDMI2_WALL
+  echo "finished ext disp"
+  exit
 else
   bspc monitor eDP-1  -d 1 2 3 4 5 6 7 8 9
   xwallpaper --output eDP-1  --zoom  $LAPTOP_WALL
-fi
-# vim:ft=sh
+  exit
+end
+# vim:ft=ion

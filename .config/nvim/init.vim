@@ -1,81 +1,70 @@
-source ~/.config/nvim/packages.vim
+"Toggles------------
+set nocompatible
+set norelativenumber number
+set nowrap
+set noshowmatch     " Don't do the annoying jump to the matching bracket when closing bracket is typed
+set termguicolors
 
-"Neovim Config----------------------------
-  "Colorscheme------{{{
-    colorscheme nova
-    set background=dark
-    syntax enable
-  "-----------------}}}
+set splitbelow " More natural split behavior
+set splitright
 
-  "Display----------{{{
-    set norelativenumber number
-    set noshowmode
-    set guicursor=
-    set nowrap
-    set termguicolors 
-    set foldmethod=marker
-  "-----------------}}}
+set hlsearch
+set incsearch
+set ignorecase
 
-  "Search-----------{{{
-    set hlsearch
-    set incsearch
-    set ignorecase
-    set smartcase
-  "-----------------}}}
+set smartcase     " Override 'ignorecase' option if search pattern contains uppercase letters
+set tabstop=4     " Number of spaces a tab represents
+set shiftwidth=4  " Number of spaces >>, <<, and autoindent use
+set expandtab     " Insert correct number of spaces instead of a tab when tab key is pressed
 
-  "Settings---------{{{
-    set hidden
-    set autoindent
-    set smartindent
-    set expandtab
-    set tabstop=2     " Number of spaces a tab represents
-    set shiftwidth=2  " Number of spaces >>, <<, and autoindent use
-  "-----------------}}}
+"Keymappings--------
+let mapleader="\<SPACE>"
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 
-  "Mappings---------{{{
-    let mapleader = " "
-    nmap <silent> <c-k> :wincmd k<CR>
-    nmap <silent> <c-j> :wincmd j<CR>
-    nmap <silent> <c-h> :wincmd h<CR>
-    nmap <silent> <c-l> :wincmd l<CR>
-    map <leader>i :tabe ~/.config/nvim/init.vim<CR>
-    map <leader>s :so ~/.config/nvim/init.vim<CR>
-    map <leader><leader> :Explore<CR>
-    command! WQ wq
-    command! Wq wq
-    command! W w
-    command! Q q
-  "-----------------}}}
-"-----------------------------------------
+"Packages-----------
+set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+let dein_cache_dir = '~/.config/nvim/dein/'
+"--------
+set bg=dark
+colorscheme gunmetal-grey
+"-------------
+if dein#load_state(dein_cache_dir)
+  call dein#begin(dein_cache_dir)
+  call dein#add(dein_cache_dir.'repos/github.com/Shougo/dein.vim')
 
-"Lightline Config-------------------------
-  let g:lightline = {
-  \  'colorscheme': 'seoul256',
-  \  'active': {
-  \     'left':[
-  \        ['mode','paste'],
-  \        ['readonly','filename','modified']
-  \     ],
-  \     'right':[
-  \        ['fileformat','filencoding'],
-  \        ['percent']
-  \     ]
-  \  }
-  \}
-"-----------------------------------------
+  call dein#add('haya14busa/dein-command.vim')
 
-"Deoplete Config--------------------------
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#max_list = 8
-"-----------------------------------------
+  call dein#add('Shougo/deoplete.nvim' )
+  call dein#add('cocopon/vaffle.vim'   )
+  call dein#add('preservim/nerdtree'   )
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('junegunn/fzf'         )
+  call dein#add('rust-lang/rust.vim'   )
+  call dein#add('vmchale/ion-vim'      )
 
-"Neomake Config---------------------------
-"call neomake#configure#automake('nw', 1000)
-"-----------------------------------------
+  call dein#end()
+  call dein#save_state()
+endif
+"-------------
 
-"augroups---------------------------------
-  augroup packager_filetype
-    autocmd FileType go        packadd vim-go
-    autocmd FileType markdown  packadd vim-pencil
-  augroup END
-"-----------------------------------------
+function CleanPackages()
+    call map(dein#check_clean(), "delete(v:val, 'rf')")
+    call dein#recache_runtimepath()
+endfunction
+
+"Package Config-----
+let g:deoplete#enable_at_startup = 1
+let NERDTreeHijackNetrw = 0
+let g:lightline = {
+\    'colorscheme': 'one',
+\    'active': {
+\        'right':[ ['fileformat','filencoding'], ['percent'] ]
+\    }
+\}
+
+"AutoCommands-----
+

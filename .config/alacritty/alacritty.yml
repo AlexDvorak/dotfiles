@@ -1,110 +1,39 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
-
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty itself.
 env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  TERM: screen-256color-bce
+    TERM: screen-256color-bce
 
 window:
-  # Window dimensions (changes require restart)
-  #
-  # Specified in number of columns/lines, not pixels.
-  # If both are `0`, this setting is ignored.
-  dimensions:
-    columns: 0
-    lines: 0
-
-  # Window padding (changes require restart)
-  #
-  # Blank space added around the window in pixels. This padding is scaled
-  # by DPI and the specified value is always added at both opposing sides.
-  padding:
-    x: 0
-    y: 1
-
-  # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
-
-  # Window decorations
-  #
-  # Values for `decorations`:
-  #     - full: Borders and title bar
-  #     - none: Neither borders nor title bar
-  #
-  # Values for `decorations` (macOS only):
-  #     - buttonless: Title bar, transparent background and title bar buttons
-  #     - transparent: Title bar, transparent background, but no title bar buttons
-  decorations: full
-
-  # When true, alacritty starts maximized.
+    dimensions:
+        columns: 0
+        lines: 0
+    padding:
+        x: 0
+        y: 1
+    dynamic_padding: false
+    decorations: full
+    dynamic_title: true
 
 scrolling:
-  # Maximum number of lines in the scrollback buffer.
-  # Specifying '0' will disable scrolling.
-  history: 10000
+    history: 10000
+    multiplier: 1
 
-  # Number of lines the viewport will move for every line scrolled when
-  # scrollback is enabled (history > 0).
-  multiplier: 1
-
-  # Faux Scrolling
-  #
-  # The `faux_multiplier` setting controls the number of lines the terminal
-  # should scroll when the alternate screen buffer is active. This is used
-  # to allow mouse scrolling for applications like `man`.
-  #
-  # Specifying `0` will disable faux scrolling.
-
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
-
-# Spaces per Tab (changes require restart)
-#
-# This setting defines the width of a tab in cells.
-#
-# Some applications, like Emacs, rely on knowing about the width of a tab.
-# To prevent unexpected behavior in these applications, it's also required to
-# change the `it` value in terminfo when altering this setting.
-tabspaces: 4
-
-# Font configuration (changes require restart)
 font:
-  normal:
-    family: DejaVu Sans Mono
-    style: Regular
+    normal:
+        family: Droid Sans Mono for Powerline
+        style: Regular
+    bold:
+        style: Bold
+    italic:
+        style: Italic
+    size: 12.0
+    offset:
+        x: 0
+        y: 0
+    glyph_offset:
+        x: 0
+        y: 0
+    use_thin_strokes: false
 
-  bold:
-    style: Regular
-
-  italic:
-    style: Regular
-
-  size: 7.0
-
-  # Offset is the extra space around each character. `offset.y` can be thought of
-  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
-  offset:
-    x: 0
-    y: 0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the right,
-  # increasing `y` moves the glyph upwards.
-  glyph_offset:
-    x: 0
-    y: 0
-
-  use_thin_strokes: false
-
-# Display the time it takes to redraw each frame.
-debug.render_timer: false
+debug.render_timer: true
 
 # Keep the log file after quitting Alacritty.
 debug.persistent_logging: false
@@ -113,77 +42,76 @@ debug.persistent_logging: false
 draw_bold_text_with_bright_colors: true
 
 colors:
-  primary:
-    background: '0x2E3440'
-    foreground: '0xD8DEE9'
-  cursor:
-    text: '0x2E3440'
-    cursor: '0xD8DEE9'
-  normal:
-    black: '0x3B4252'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x88C0D0'
-    white: '0xE5E9F0'
-  bright:
-    black: '0x4C566A'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x8FBCBB'
-    white: '0xECEFF4'
+    primary:
+        background: '0x2E3440'
+        foreground: '0xD8DEE9'
+    cursor:
+        text: '0x2E3440'
+        cursor: '0xD8DEE9'
+    normal:
+        black: '0x3B4252'
+        red: '0xBF616A'
+        green: '0xA3BE8C'
+        yellow: '0xEBCB8B'
+        blue: '0x81A1C1'
+        magenta: '0xB48EAD'
+        cyan: '0x88C0D0'
+        white: '0xE5E9F0'
+    bright:
+        black: '0x4C566A'
+        red: '0xBF616A'
+        green: '0xA3BE8C'
+        yellow: '0xEBCB8B'
+        blue: '0x81A1C1'
+        magenta: '0xB48EAD'
+        cyan: '0x8FBCBB'
+        white: '0xECEFF4'
 
 # Values for `animation`:
-#   - Ease
-#   - EaseOut
-#   - EaseOutSine
-#   - EaseOutQuad
-#   - EaseOutCubic
-#   - EaseOutQuart
-#   - EaseOutQuint
-#   - EaseOutExpo
-#   - EaseOutCirc
-#   - Linear
+#     - Ease
+#     - EaseOut
+#     - EaseOutSine
+#     - EaseOutQuad
+#     - EaseOutCubic
+#     - EaseOutQuart
+#     - EaseOutQuint
+#     - EaseOutExpo
+#     - EaseOutCirc
+#     - Linear
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
-  animation: EaseOutExpo
-  duration: 0
-  color: '0xffffff'
+bell:
+    animation: EaseOutExpo
+    duration: 0
+    color: '0xffffff'
 
 background_opacity: 1.0
 
 # mouse_bindings:
-#   - { mouse: Middle, action: PasteSelection }
+#     - { mouse: Middle, action: PasteSelection }
 
 mouse:
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
+    double_click: { threshold: 300 }
+    triple_click: { threshold: 300 }
 
-  # If this is `true`, the cursor is temporarily hidden when typing.
-  hide_when_typing: false
+    # If this is `true`, the cursor is temporarily hidden when typing.
+    hide_when_typing: false
 
-  url:
-    # These are the modifiers that need to be held down for opening URLs when clicking
-    # on them. The available modifiers are documented in the key binding section.
-    modifiers: None
+    url:
+        # These are the modifiers that need to be held down for opening URLs when clicking
+        # on them. The available modifiers are documented in the key binding section.
+        modifiers: None
 
 selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+    semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
-  # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
+    # When set to `true`, selected text will be copied to the primary clipboard.
+    save_to_clipboard: false
 
 # Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
 
 cursor:
-  style: Underline
-  unfocused_hollow: true
+    style: Underline
+    unfocused_hollow: true
 
 live_config_reload: true
 

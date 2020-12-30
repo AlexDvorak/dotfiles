@@ -30,7 +30,7 @@ XF86MonBrightnessDown
   light -U 0.5
 
 alt + shift + s
-  /home/alex/.config/scripts/music.zsh
+  ed --silent < /home/alex/.config/scripts/passcp | dmenu | xargs pass -c
 
 alt + shift + p
   slock &
@@ -41,7 +41,7 @@ alt + shift + p
 
 # terminal emulator
 super + Return
-	alacritty
+	alacritty --working-directory /home/alex
 
 # program launcher
 super + @space

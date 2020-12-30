@@ -1,62 +1,240 @@
-[global/wm]
-margin-bottom = 0
-margin-top = 0
-;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-include-file = ~/.config/polybar/bar_base.ini
-include-file = ~/.config/polybar/colors.ini
-include-file = ~/.config/polybar/modules.ini
+;---------------------------------------
+;		COLORS
+;---------------------------------------
 
-;; Bar Settings
+[colors]
+nord0 = #2E3440
+nord1 = #3B4252
+nord2 = #434C5E
+nord3 = #4C566A
+nord4 = #D8DEE9
+nord5 = #E5E9F0
+nord6 = #ECEFF4
+nord7 = #8FBCBB
+nord8 = #88C0D0
+nord9 = #81A1C1
+nord10 = #5E81AC
+nord11 = #BF616A
+nord12 = #D08770
+nord13 = #EBCB8B
+nord14 = #A3BE8C
+nord15 = #B48EAD
+
+;---------------------------------------
+;		GLOBAL
+;---------------------------------------
+
 [bar/main]
-inherit = base/bar
+
+width = 100%
+height = 24 
+bottom = true
+line-size = 3
+
+background = ${colors.nord3}
+
+wm-restack = bspwm
+
+;---------------------------------------
+;		FONTS
+;---------------------------------------
+
 monitor = HDMI-2
-font-0 = "Hack:size=10;2"
-font-1 = "Siji:size=10;2"
-;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-[bar/main-laptop]
-inherit = base/bar
+font-0 = Noto Sans Mono:size=10;2
+font-1 = Wuncon Siji:size=10;2
+
+;---------------------------------------
+;	     MODULES LAYOUT
+;---------------------------------------
+
+modules-left = bspwm 
+modules-right = network alsa battery date time
+
+[bar/laptop]
+width = 100%
+height = 30 
+bottom = true
+line-size = 3
+
+background = ${colors.nord1}
+
+wm-restack = bspwm
+
+;---------------------------------------
+;		FONTS
+;---------------------------------------
+
 monitor = eDP-1
-font-0 = "Hack:size=13;2"
-font-1 = "Siji:size=10;2"
-;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_}}}
+font-0 = Noto Sans Mono:size=12;2
+font-1 = Wuncon Siji:size=14;2
 
-;; Application Settings
-[settings]
-; The throttle settings lets the eventloop swallow up til X events
-; if they happen within Y millisecond after first event was received.
-; This is done to prevent flood of update event.
+;---------------------------------------
+;	     MODULES LAYOUT
+;---------------------------------------
+
+modules-left = bspwm 
+modules-right = network alsa battery date time
+
+
+;---------------------------------------
+;	      BSPWM MODULE
+;---------------------------------------
+[module/bspwm]
+type = internal/bspwm
+
+format = <label-state>
+format-padding = 0
+
+label-monitor = %name%
+
+label-focused = %name%
+
+label-occupied = %name%
+
+label-urgent = %name%
+
+label-empty = %name%
+
+label-focused-padding = 2
+label-urgent-padding = 2
+label-occupied-padding = 2
+label-empty-padding = 2
+label-focused-urgent-foreground = ${colors.nord0}
+label-focused-urgent-background = ${colors.nord11}
+label-focused-occupied-foreground = ${colors.nord0}
+label-focused-occupied-background = ${colors.nord8}
+label-focused-empty-foreground = ${colors.nord0}
+label-focused-empty-background = ${colors.nord8}
+label-occupied-foreground = ${colors.nord0}
+label-occupied-background = ${colors.nord9}
+label-urgent-foreground = ${colors.nord0}
+label-urgent-background = ${colors.nord13}
+label-empty-foreground = ${colors.nord0}
+label-empty-background = ${colors.nord9}
+
+;---------------------------------------
+;	   DATE MODULE
+;---------------------------------------
+
+[module/date]
+type = internal/date
+
+interval = 60
+
+date = %a %d
+
+label = " %date% "
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord13}
+
+;---------------------------------------
+;	   TIME MODULE
+;---------------------------------------
+[module/time]
+type = internal/date
+time = %H:%M
+
+label = "%time%"
+
+format-foreground = ${colors.nord0}
+format-background = ${colors.nord11}
+format-padding = 1
+
+;---------------------------------------
+;	   BATTERY MODULE
+;---------------------------------------
+
+[module/battery]
+type = internal/battery
+
+battery = BAT1
+adapter = ACAD
+
+full-at = 99
+
+format-charging = <animation-charging> <label-charging>
+format-charging-foreground = ${colors.nord0}
+format-charging-background = ${colors.nord15}
+
+format-full = <label-full>
+format-full-foreground = ${colors.nord0}
+format-full-background = ${colors.nord15}
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-foreground = ${colors.nord0}
+format-discharging-background = ${colors.nord15}
+
+label-charging = "%percentage%% "
+label-discharging ="%percentage%% "
+label-discharging-foreground = ${colors.nord0}
+label-full = " 󱈑 %percentage%% "
+
+ramp-capacity-0 = " 󱊡"
+ramp-capacity-1 = " 󱊢"
+ramp-capacity-2 = " 󱊣"
+
+animation-charging-0 = " 󱊤"
+animation-charging-1 = " 󱊥"
+animation-charging-2 = " 󱊦"
+
+;---------------------------------------
+;	   AUDIO MODULE
+;---------------------------------------
+;[module/pulseaudio]
+;type = internal/pulseaudio
+;sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 ;
-; For example if 5 modules emit an update event at the same time, we really
-; just care about the last one. But if we wait too long for events to swallow
-; the bar would appear sluggish so we continue if timeout
-; expires or limit is reached.
-throttle-output = 5
-throttle-output-for = 10
+;label-volume = " 󰕾 %percentage%% "
+;
+;label-muted = " 󰖁 Mute "
+;
 
-; Time in milliseconds that the input handler will wait between processing events
-throttle-input-for = 30
+[module/alsa]
+type = internal/alsa
 
-; Reload upon receiving XCB_RANDR_SCREEN_CHANGE_NOTIFY events
-screenchange-reload = false
+format-volume = <ramp-volume> <label-volume>
+format-volume-foreground = ${colors.nord0}
+format-volume-background = ${colors.nord5}
+format-muted-foreground = ${colors.nord0}
+format-muted-background = ${colors.nord5}
+format-volume-padding = 2
 
-; Compositing operators
-; @see: https://www.cairographics.org/manual/cairo-cairo-t.html#cairo-operator-t
-compositing-background = source
-compositing-foreground = over
-compositing-overline = over
-compositing-underline = over
-compositing-border = over
+label-volume = %percentage%%
 
-; Define fallback values used by all module formats
-format-foreground = 
-format-background = 
-format-underline =
-format-overline =
-format-spacing =
-format-padding =
-format-margin =
-format-offset =
+format-muted-prefix = " "
+format-muted-padding = 2
+label-muted = "Muted"
 
-; Enables pseudo-transparency for the bar
-; If set to true the bar can be transparent without a compositor.
-pseudo-transparency = false
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+
+;---------------------------------------
+;	   NETWORK MODULE
+;---------------------------------------
+[module/network]
+type=internal/network
+interface = wlan0
+
+format-connected = <ramp-signal> <label-connected>
+format-disconnected = <label-disconnected>
+format-packetloss = "󰤫 "
+
+ramp-signal-0 = " 󰤯"
+ramp-signal-1 = " 󰤟"
+ramp-signal-2 = " 󰤢"
+ramp-signal-3 = " 󰤥"
+ramp-signal-4 = " 󰤨"
+
+label-disconnected = " 󰤮 Disconnected "
+label-connected = "%essid% "
+
+format-connected-foreground = ${colors.nord5}
+format-connected-background = ${colors.nord1}
+format-disconnected-foreground = ${colors.nord5}
+format-disconnected-background = ${colors.nord1}
