@@ -22,11 +22,11 @@ dunst &
 polybar $LAPTOP_BAR & >/dev/null
 #######
 
-bspc config border_width 2
-bspc config top_padding      10
-bspc config bottom_padding   44
-bspc config left_padding     17
-bspc config right_padding    17
+#bspc config border_width 2
+#bspc config top_padding      10
+#bspc config bottom_padding   44
+#bspc config left_padding     17
+#bspc config right_padding    17
 
 #####
 if [ "$ext_dsp" = "connected" ]; then

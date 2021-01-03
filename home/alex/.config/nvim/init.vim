@@ -28,9 +28,6 @@ nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 "Packages-----------
 set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 let dein_cache_dir = '~/.config/nvim/dein/'
-"--------
-set bg=dark
-colorscheme gunmetal-grey
 "-------------
 if dein#load_state(dein_cache_dir)
   call dein#begin(dein_cache_dir)
@@ -46,10 +43,21 @@ if dein#load_state(dein_cache_dir)
   call dein#add('rust-lang/rust.vim'   )
   call dein#add('vmchale/ion-vim'      )
 
+  call dein#add('co1ncidence/gunmetal.vim')
+  call dein#add('swalladge/paper.vim')
+  call dein#add('NLKNguyen/papercolor-theme')
+  call dein#add('axvr/photon.vim')
+  call dein#add('kjssad/quantum.vim')
+  call dein#add('casperstorm/sort-hvid.vim')
+  call dein#add('habamax/vim-gruvbit')
+  call dein#add('koron/vim-monochromenote')
+
   call dein#end()
   call dein#save_state()
 endif
 "-------------
+set bg=dark
+colorscheme gunmetal-grey
 
 function CleanPackages()
     call map(dein#check_clean(), "delete(v:val, 'rf')")
